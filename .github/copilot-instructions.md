@@ -11,8 +11,9 @@ Java Swing desktop application supporting a pawnbroker business in India.
 1. Open `docs/STATUS.md`. It lists features by 2-digit number with a status of `TODO`, `PENDING` or `DONE`.
 2. For any feature that is not `DONE`, read its spec in `docs/f-NN.md` (e.g. feature `02` -> `docs/f-02.md`).
 3. Implement the feature, build it, and verify it works.
-4. Set the feature to `DONE` in `docs/STATUS.md`, then commit and push to `main`.
-5. If a spec is unclear or incomplete, ask the user before building.
+4. Set the feature to `DONE` in `docs/STATUS.md`, then report the changes and verification results to the user.
+5. Do not commit or push changes unless the user explicitly confirms.
+6. If a spec is unclear or incomplete, ask the user before building.
 
 The user adds new features by adding a row to `docs/STATUS.md` and writing `docs/f-NN.md`.
 
