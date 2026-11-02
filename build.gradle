@@ -12,6 +12,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.liquibase:liquibase-core:4.29.2'
     runtimeOnly 'com.mysql:mysql-connector-j:8.4.0'
 }
 

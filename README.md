@@ -32,8 +32,12 @@ your Windows user account protected.
 Settings previously saved in the application's working-directory `config`
 folder are not migrated automatically; enter them again when prompted.
 
-The current feature only verifies connectivity and does not read or write
-business data. An external MySQL server is recommended for a workload with
+The application does not yet read or write business data. On startup,
+Liquibase applies pending database changes from
+`src/main/resources/database/db.changelog-master.xml` and records applied
+changes in Liquibase's `DATABASECHANGELOG` table. Add future schema changes as
+Liquibase changesets in this resource changelog; do not apply schema SQL outside
+Liquibase. An external MySQL server is recommended for a workload with
 heavy reads and writes, especially when multiple application users need
 shared data and centralized backups. An embedded database is better suited
 to a single-user, local-only application.

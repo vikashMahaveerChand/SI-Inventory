@@ -11,10 +11,20 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import liquibase.Contexts;
+import liquibase.LabelExpression;
+import liquibase.Liquibase;
+import liquibase.database.Database;
+import liquibase.database.DatabaseFactory;
+import liquibase.database.jvm.JdbcConnection;
+import liquibase.exception.LiquibaseException;
+import liquibase.resource.ClassLoaderResourceAccessor;
+
 final class DatabaseConnection {
 
     private static final String CONFIG_DIRECTORY = "SI-Inventory";
     private static final String CONFIG_FILE = "database.properties";
+    private static final String CHANGELOG = "database/db.changelog-master.xml";
 
     private DatabaseConnection() {
     }
@@ -32,7 +42,7 @@ final class DatabaseConnection {
         return properties;
     }
 
-    static void verifyConnection(Properties properties) throws IOException, SQLException {
+    static void verifyConnection(Properties properties) throws IOException, SQLException, LiquibaseException {
         String host = requiredProperty(properties, "db.host");
         String portValue = requiredProperty(properties, "db.port");
         String database = requiredProperty(properties, "db.name");
@@ -54,6 +64,14 @@ final class DatabaseConnection {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
             if (!connection.isValid(5)) {
                 throw new SQLException("The MySQL server did not validate the connection.");
+            }
+            Database liquibaseDatabase = DatabaseFactory.getInstance()
+                    .findCorrectDatabaseImplementation(new JdbcConnection(connection));
+            try {
+                Liquibase liquibase = new Liquibase(CHANGELOG, new ClassLoaderResourceAccessor(), liquibaseDatabase);
+                liquibase.update(new Contexts(), new LabelExpression());
+            } finally {
+                liquibaseDatabase.close();
             }
         }
     }

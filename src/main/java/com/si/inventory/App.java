@@ -27,7 +27,7 @@ public class App {
         welcome.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 48));
         frame.add(welcome);
 
-        JLabel databaseStatus = new JLabel("Checking MySQL connection...", SwingConstants.CENTER);
+        JLabel databaseStatus = new JLabel("Checking MySQL connection and database updates...", SwingConstants.CENTER);
         frame.add(databaseStatus, java.awt.BorderLayout.SOUTH);
         frame.setVisible(true);
 
@@ -58,7 +58,7 @@ public class App {
 
     private static void checkDatabaseConnection(JFrame frame, JLabel databaseStatus, Properties configuration,
             boolean saveConfiguration) {
-        databaseStatus.setText("Checking MySQL connection...");
+        databaseStatus.setText("Checking MySQL connection and database updates...");
         new SwingWorker<Void, Void>() {
             @Override
             protected Void doInBackground() throws Exception {
@@ -73,10 +73,10 @@ public class App {
             protected void done() {
                 try {
                     get();
-                    databaseStatus.setText("MySQL connection successful.");
+                    databaseStatus.setText("MySQL connected; database changes are up to date.");
                 } catch (InterruptedException exception) {
                     Thread.currentThread().interrupt();
-                    showDatabaseError(databaseStatus, "Database connection check was interrupted.", exception);
+                    showDatabaseError(databaseStatus, "Database setup was interrupted.", exception);
                 } catch (ExecutionException exception) {
                     Throwable cause = exception.getCause();
                     showDatabaseError(databaseStatus, cause.getMessage(), cause);
@@ -88,7 +88,7 @@ public class App {
 
     private static void showDatabaseError(JLabel databaseStatus, String message, Throwable cause) {
         String details = message == null ? cause.toString() : message;
-        databaseStatus.setText("MySQL connection failed: " + details);
-        JOptionPane.showMessageDialog(null, details, "MySQL Connection Failed", JOptionPane.ERROR_MESSAGE);
+        databaseStatus.setText("Database setup failed: " + details);
+        JOptionPane.showMessageDialog(null, details, "Database Setup Failed", JOptionPane.ERROR_MESSAGE);
     }
 }
