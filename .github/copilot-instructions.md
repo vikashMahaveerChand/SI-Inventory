@@ -2,8 +2,8 @@
 
 ## Overview
 Java Swing desktop application supporting a pawnbroker business in India.
-- Language: Java 8 (compiled with `maven.compiler.release=8`; do not use APIs or syntax newer than Java 8)
-- Build: Maven
+- Language: Java 8 (compiled with `options.release = 8` in Gradle; do not use APIs or syntax newer than Java 8)
+- Build: Gradle
 - Database: MySQL
 - Base package: `com.si.inventory`; main class: `com.si.inventory.App`
 
@@ -18,8 +18,8 @@ The user adds new features by adding a row to `docs/STATUS.md` and writing `docs
 
 ## Build and run
 ```
-mvn package
-java -jar target\si-inventory-1.0.0-SNAPSHOT.jar
+.\gradlew build
+java -jar build\libs\si-inventory-1.0.0-SNAPSHOT.jar
 ```
 
 ## Conventions
