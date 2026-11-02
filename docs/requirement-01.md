@@ -1,0 +1,28 @@
+# Requirement 01
+Create a Java Swing application using java 8
+
+## Purpose
+The application is going to support Pawnbroker business in India.
+For Database we will be using mysql
+
+Feature-1 : Create a Java Swing app - When the application runs i need to see a window in full screen and have a Message name Welcome
+
+## Core Features (must-have)
+
+
+## Nice-to-have
+
+
+## Data / Entities
+
+
+## Tech Preferences
+
+
+## Users & Access
+
+
+## Integrations & Constraints
+
+
+## Examples / Notes
