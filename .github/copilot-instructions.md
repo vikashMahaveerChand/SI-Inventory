@@ -28,3 +28,9 @@ java -jar build\libs\si-inventory-1.0.0-SNAPSHOT.jar
 - Keep changes focused on the requested feature; don't refactor unrelated code.
 - Commit messages are short and describe the feature (e.g. "Feature 02: ...").
 - Don't commit credentials; keep DB connection settings out of source control (use a local config file that is git-ignored).
+
+## Keyboard-first user experience
+- Design the application so common workflows can be completed with the keyboard; mouse interaction should be secondary.
+- Pressing Enter in a text or password field must move focus to the next control, like Tab, and must not submit or close a dialog.
+- For a drop-down control, the first Enter opens the drop-down; the next Enter commits the highlighted selection.
+- Enter on a focused button must activate that button's own action. Do not let Enter in another control trigger a dialog's default button.

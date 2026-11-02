@@ -11,6 +11,10 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    runtimeOnly 'com.mysql:mysql-connector-j:8.4.0'
+}
+
 tasks.withType(JavaCompile).configureEach {
     options.release = 8
     options.encoding = 'UTF-8'
